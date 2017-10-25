@@ -5,13 +5,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: grey;
+  /* background: grey; */
 }
 
 .login{
 
   border: solid blue;
 
+}
+
+.logo{
+  height: 3em;
+  background: no-repeat 0 0;
 }
 
 .login-form{
@@ -43,4 +48,8 @@ body {
 }
 .components-form-demo-normal-login .login-form-button {
   width: 100%;
+}
+
+.list{
+	padding-top: 1em;
 }

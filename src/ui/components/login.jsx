@@ -13,17 +13,13 @@ class LoginForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        // console.log("Received values of form: ", JSON.stringify(values))
-        // console.log('settings.public.login_key '+JSON.stringify(settings.public.login_key))
-      
-     let test=   this.getAddressFromKey(values.password)
-      
-     console.log('test '+JSON.stringify(test ))
+     this.props.loginAndSetAddress(this.getAddressFromKey(values.password))
       }
     });
   };
 
   getAddressFromKey = (key) => {
+  
     // Pull the public key from the signed message.
     let messageBuffer = new Buffer(settings.public.login_key, "hex");
     let keyBuffer = new Buffer(key, "hex");
@@ -71,6 +67,7 @@ class LoginForm extends React.Component {
       <Card
         bordered={false}
         className="login-card"
+        bordered='true'
       >
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>

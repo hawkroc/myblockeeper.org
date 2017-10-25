@@ -1,17 +1,30 @@
 import React from "react";
-import { LocaleProvider } from 'antd'
+import { LocaleProvider } from "antd";
 import { connect } from "react-redux";
-import Login from "../components/login"
-
+import Login from "../components/login";
+import { loginAction } from "../../redux/actions/userAction";
+import HeaderContentLayout from "./layouts/headerContent"
+import BodyContentLayout from "./layouts/bodyContent"
 class RootContainer extends React.Component {
-
-
   render() {
-    const {isLogin,language} = this.props;
+    const { isLogin, language,languageConfig, loginAndSetAddress } = this.props;
 
     return (
-        <LocaleProvider locale={language}>
-     <Login/>
+      <LocaleProvider>
+        {
+          isLogin ? (
+        
+        
+						<div className="list">
+							<HeaderContentLayout />
+							<BodyContentLayout {...{  language ,languageConfig}}/>  
+						</div>    
+
+        ) : (
+          <div>
+            <Login {...{ loginAndSetAddress }} />
+          </div>
+        )}
       </LocaleProvider>
     );
   }
@@ -19,18 +32,21 @@ class RootContainer extends React.Component {
 
 const mapStateToProps = state => {
   // TODO:
-  console.log('this.state'+JSON.stringify(state))
-  let address= state.users.address
-  let isLogin=false
-  let language='english'
+  console.log("this.state" + JSON.stringify(state));
+  let address = state.users.address;
+  let isLogin = state.users.isLogin;
+  let language =state.users.language;
+  let languageConfig=state.users.languageConfig
 
-  return {isLogin,language}
-
-
+  return { isLogin, language,languageConfig };
 };
 
 const mapDispatchToProps = (dispatch, state) => {
-  return {};
+  return {
+    loginAndSetAddress: address => {
+      dispatch(loginAction(address));
+    }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RootContainer);
