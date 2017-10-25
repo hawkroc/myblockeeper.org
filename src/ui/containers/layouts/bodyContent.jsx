@@ -1,9 +1,7 @@
 import React from 'react'
-
 import { Tabs } from 'antd'
+import TransactionsViewer from '../transactionsViewer'
 const { TabPane } = Tabs
-
-// import TransactionsViewer from '../containers/transactionsViewer'
 // import TransactionsReporting from '../containers/transactionsReporting'
 // import ApplicationSettings from '../containers/applicationSettings'
 // import UsersSettings from '../containers/usersSettings'
@@ -17,7 +15,7 @@ const Layout = ({ language,languageConfig }) => {
 	   <div>
 			<Tabs defaultActiveKey="0" >
 				<TabPane tab={languageConfig.Transactions_title} key="0">
-					{/* <TransactionsViewer /> */}
+					{<TransactionsViewer />}
 				</TabPane>
 				<TabPane tab={languageConfig.Reporting_title} key="1">
 					{/* <TransactionsReporting {...{ languageConfig }} /> */}

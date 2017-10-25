@@ -65,7 +65,6 @@ class LoginForm extends React.Component {
           </header>
         </div>
       <Card
-        bordered={false}
         className="login-card"
         bordered='true'
       >

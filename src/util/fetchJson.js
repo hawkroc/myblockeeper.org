@@ -12,10 +12,12 @@ import axios from 'axios'
 const url = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms='
 export const GetExchange = (type = 'USD') => {
 	let final = url + type
+
 	return axios
 		.get(final)
 		.then((response) => {
-			return  response
+		
+			return  response.data
 		})
 		.catch(error => {
 			throw(error)

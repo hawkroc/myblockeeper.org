@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import usersReducer from '../reducers/userReducer'
+import transactionReducer from './trancationsReducer'
 
 
 
@@ -8,7 +9,8 @@ import usersReducer from '../reducers/userReducer'
  * 
  */
 const rootReducer = combineReducers({
-  users: usersReducer
+  users: usersReducer,
+  transaction:transactionReducer
 })
 
 

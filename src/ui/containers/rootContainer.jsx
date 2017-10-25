@@ -32,7 +32,6 @@ class RootContainer extends React.Component {
 
 const mapStateToProps = state => {
   // TODO:
-  console.log("this.state" + JSON.stringify(state));
   let address = state.users.address;
   let isLogin = state.users.isLogin;
   let language =state.users.language;
