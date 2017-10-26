@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes'
-import {GetExchange,GetBalance} from '../../util/fetchJson'
+import {GetExchange,GetBalance,GetTranactions} from '../../util/fetchJson'
 
 export const  setExchange = (rate) => ({
   type: actionTypes.SETEXCHANGE,
@@ -24,8 +24,27 @@ export const fetchEtherExchangeRate = (currency) => {
 export const fetchEtherBalance = (address) => {
 	return (dispatch) => {
 		GetBalance(address).then((response) => {
-		    console.log('response'+JSON.stringify(response))
 			dispatch(setBalance(response))
 		})
 	}
+}
+
+export const  setTranactions = (value) => ({
+  type: actionTypes.SETTRANSACTIONS,
+  payload: value
+})
+
+
+export const fetchTranactions=(address)=>{
+	return (dispatch) => {
+		GetTranactions(address).then((response) => {
+			dispatch(setTranactions(response.data.result))
+		})
+	}
+}
+
+export const setTxTimestampFilter=(time)=>{
+type:null
+payload:null
+
 }

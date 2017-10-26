@@ -4,28 +4,31 @@ import { connect } from 'react-redux'
 
 import { Row, Col } from 'antd'
 
-// import TransactionsGridComponent from '../components/transactions/transactionsGrid'
-// import TransactionsExportComponent from '../components/transactions/transactionsExport'
-// import TransactionsFilterContainer from '../containers/transactionsFilter'
+ import TransactionsGridComponent from '../components/transactions/transactionsGrid'
+ import TransactionsExportComponent from '../components/transactions/transactionsExport'
+import TransactionsFilterContainer from './transactionsFilter'
 // import RefreshTimerComponent from '../components/refreshTimer'
-
+ 
 // import coreDefinitions from '../../modules/core/definitions'
 // import taxationDefinitions from '../../modules/taxation/definitions'
 // import taxationTransformers from '../../modules/taxation/transformers'
 // import labellingDefinitions from '../../modules/transaction-labelling/definitions'
 // import labellingTransformers from '../../modules/transaction-labelling/transformers'
 
-import { fetchEtherExchangeRate,fetchEtherBalance } from '../../redux/actions/transactionsAction'
+import { fetchEtherExchangeRate,fetchEtherBalance,fetchTranactions } from '../../redux/actions/transactionsAction'
 
 
 class TransactionsViewer extends React.Component {
 	componentDidMount() {
 		this.props.fetchExchangeRate()
 		this.props.fetchBalance(this.props.address)
+		this.props.fetchTransactionsFromApi(this.props.address)
 	}
 
 	render() {
 		const {
+			transactions,
+			transactionKeyDefs,
 			balance,
 			address,
 			usdExchangeRate,
@@ -35,10 +38,10 @@ class TransactionsViewer extends React.Component {
 			<div>
 				<Row>
 					<Col span={4}> 
-						{/* <TransactionsExportComponent {...{ transactions, transactionKeyDefs }} /> */}
+						{/* {<TransactionsExportComponent {...{ transactions, transactionKeyDefs}} />} */}
 					</Col>
 					<Col offset={5} span={6}>
-						{/* <TransactionsFilterContainer /> */}
+						<TransactionsFilterContainer />
 					</Col>
 				
 						<Col offset={3} span={5}>
@@ -50,16 +53,12 @@ class TransactionsViewer extends React.Component {
 						</div>
 					</Col>
 				</Row>
-				{/* <TransactionsGridComponent
+				{<TransactionsGridComponent
 					{...{
-						transactions,
-						usdExchangeRate,
-						activeProfile,
-
-						addressDisplayTransformer,
-						valueExchangeTransformer
+						transactions
+						
 					}}
-				/> */}
+				/>} 
 				<Row>
 				<Col span={4} offset={1}>
 					{/* <RefreshTimerComponent /> */}
@@ -71,12 +70,14 @@ class TransactionsViewer extends React.Component {
 }
 
 const mapStateToProps = state => {
+	    let transactions = state.transaction.transactions
 		let languageConfig= state.users.languageConfig
 let usdExchangeRate =state.transaction.exchange
 let address =state.users.address
 let balance=state.transaction.balance
+let transactionKeyDefs=null
 return {
-	balance ,address,languageConfig,usdExchangeRate
+	transactions,transactionKeyDefs,balance ,address,languageConfig,usdExchangeRate
 }
 
 }
@@ -88,7 +89,12 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		fetchBalance: (address) => {
 			dispatch(fetchEtherBalance(address))
+		},
+		fetchTransactionsFromApi: (address) => {
+			dispatch(fetchTranactions(address))
 		}
+
+
 	}
 }
 

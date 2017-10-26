@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from 'antd'
 
-import ClickCopyCell from '/clickCopyCell'
+import ClickCopyCell from './clickCopyCell'
 
 const weiToEther = value => (value * Math.pow(10, -18))
 
@@ -70,8 +70,8 @@ const EXAMPLE_KEY_DEF = {
  * 
  */
 const getKeyDefs = ({
-	addressDisplayTransformer,
-	valueExchangeTransformer
+	// addressDisplayTransformer,
+	// valueExchangeTransformer
 }) => {
 	return [
 		// Transaction timestamp.
@@ -96,7 +96,7 @@ const getKeyDefs = ({
 			key: 'from',
 			displayKey: 'From',
 			formattedValueTransformer: value => value,
-			displayValueTransformer: value => addressDisplayTransformer(value)
+			displayValueTransformer: value => value
 		},
 		// Transaction's target address.
 		{
@@ -104,7 +104,7 @@ const getKeyDefs = ({
 			key: 'to',
 			displayKey: 'To',
 			formattedValueTransformer: value => value,
-			displayValueTransformer: value => addressDisplayTransformer(value)
+			displayValueTransformer: value => value
 		},
 		// Transaction's explicit transferred value (in Ether)
 		{
@@ -115,41 +115,41 @@ const getKeyDefs = ({
 			displayValueTransformer: (_, formattedValue) => formattedValue == 0 ? '' 
 				: maskLongNumberValue(formattedValue)
 		},
-		// Transaction's explicit transferred value in USD
-		{
-			id: 'core_transaction_value_usd',
-			key: 'value',
-			displayKey: 'USD',
+		// // Transaction's explicit transferred value in USD
+		// {
+		// 	id: 'core_transaction_value_usd',
+		// 	key: 'value',
+		// 	displayKey: 'USD',
 
-			formattedValueTransformer: (value, { timeStamp }) => 
-				valueExchangeTransformer(timeStamp, 'ETH', weiToEther(value)),
+		// 	formattedValueTransformer: (value, { timeStamp }) => 
+		// 		valueExchangeTransformer(timeStamp, 'ETH', weiToEther(value)),
 
-			displayValueTransformer: (value, formattedValue) => 
-				value == 0 ? '' : formattedValue.toFixed(2)
-		},
-		// Transaction's explicit transferred value in Bitcoin
-		{
-			id: 'core_transaction_value_btc',
-			key: 'value',
-			displayKey: 'BTC',
+		// 	displayValueTransformer: (value, formattedValue) => 
+		// 		value == 0 ? '' : formattedValue.toFixed(2)
+		// },
+		// // Transaction's explicit transferred value in Bitcoin
+		// {
+		// 	id: 'core_transaction_value_btc',
+		// 	key: 'value',
+		// 	displayKey: 'BTC',
 
-			formattedValueTransformer: (value, { timeStamp }) => 
-				valueExchangeTransformer(timeStamp, 'BTC', weiToEther(value)),
+		// 	formattedValueTransformer: (value, { timeStamp }) => 
+		// 		valueExchangeTransformer(timeStamp, 'BTC', weiToEther(value)),
 
-			displayValueTransformer: (value, formattedValue) => 
-				value == 0 ? '' : maskLongNumberValue(formattedValue)
-		},
+		// 	displayValueTransformer: (value, formattedValue) => 
+		// 		value == 0 ? '' : maskLongNumberValue(formattedValue)
+		// },
 	]
 }
 
 const buildColumns = ({
-	usdExchangeRate,
+	// usdExchangeRate,
 
-	addressDisplayTransformer,
-	valueExchangeTransformer
+	// addressDisplayTransformer,
+	// valueExchangeTransformer
 }) => {
 
-	let columnKeys = getKeyDefs({addressDisplayTransformer, valueExchangeTransformer})
+	let columnKeys = getKeyDefs({})
 	let columns = []
 
 	for(let ck of columnKeys) {
