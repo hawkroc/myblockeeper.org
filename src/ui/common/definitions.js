@@ -90,6 +90,15 @@ const getKeyDefs = ({
 				return `${d.getFullYear()}-${monthNames[d.getMonth()]}-${d.getDate()}`
 			}
 		},
+
+		// Transaction's originating address.
+		{
+			id: 'core_blockNumber',
+			key: 'blockNumber',
+			displayKey: 'BlockNumber',
+			formattedValueTransformer: value => value,
+			displayValueTransformer: value => value
+		},
 		// Transaction's originating address.
 		{
 			id: 'core_from_address',
@@ -106,6 +115,10 @@ const getKeyDefs = ({
 			formattedValueTransformer: value => value,
 			displayValueTransformer: value => value
 		},
+
+
+
+		
 		// Transaction's explicit transferred value (in Ether)
 		{
 			id: 'core_transaction_value_eth',

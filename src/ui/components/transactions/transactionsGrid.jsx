@@ -54,7 +54,7 @@ const View = ({
 			<Table
 				columns={ columns }
 				dataSource={ transactions }
-				rowKey={ transaction => transaction._id }
+				rowKey={ transaction => transaction.timeStamp }
 				pagination={{ pageSize: 50 }}
 				scroll={{ y: height }}
 			/>
