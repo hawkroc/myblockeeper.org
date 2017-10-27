@@ -13,15 +13,16 @@ import coreDefinitions from '../../common/definitions'
 
 
 const View = ({
-	transactions
+	transactions,
 	// usdExchangeRate,
 	// activeProfile,
-
+     address
 	// addressDisplayTransformer,
 	// valueExchangeTransformer
 }) => {
   
 	let columns = coreDefinitions.buildColumns({
+		address
 		// usdExchangeRate,
 		// addressDisplayTransformer,
 		// valueExchangeTransformer

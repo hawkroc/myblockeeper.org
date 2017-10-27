@@ -70,6 +70,7 @@ const EXAMPLE_KEY_DEF = {
  * 
  */
 const getKeyDefs = ({
+	address
 	// addressDisplayTransformer,
 	// valueExchangeTransformer
 }) => {
@@ -105,7 +106,16 @@ const getKeyDefs = ({
 			key: 'from',
 			displayKey: 'From',
 			formattedValueTransformer: value => value,
-			displayValueTransformer: value => value
+			displayValueTransformer: (value) =>{ 
+				console.log('address '+JSON.stringify(address ))
+			let rs= (value===address)?true:false
+			return (
+				rs?
+				<div>{value}<b className="out label-address">OUT</b></div> :<div>{value}</div>
+			
+			)
+		
+		}
 		},
 		// Transaction's target address.
 		{
@@ -113,7 +123,15 @@ const getKeyDefs = ({
 			key: 'to',
 			displayKey: 'To',
 			formattedValueTransformer: value => value,
-			displayValueTransformer: value => value
+			displayValueTransformer:(value) =>{ 
+			let rs= (value===address)?true:false
+			return (
+				rs?
+				<div>{value}<b className="in label-address"> IN</b></div>:<div>{value}</div>
+			
+			)
+		
+		}
 		},
 
 
@@ -157,12 +175,12 @@ const getKeyDefs = ({
 
 const buildColumns = ({
 	// usdExchangeRate,
-
+	address
 	// addressDisplayTransformer,
 	// valueExchangeTransformer
 }) => {
 
-	let columnKeys = getKeyDefs({})
+	let columnKeys = getKeyDefs({address})
 	let columns = []
 
 	for(let ck of columnKeys) {

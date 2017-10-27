@@ -55,7 +55,8 @@ class TransactionsViewer extends React.Component {
 				</Row>
 				{<TransactionsGridComponent
 					{...{
-						transactions
+						transactions,
+						address
 						
 					}}
 				/>} 
