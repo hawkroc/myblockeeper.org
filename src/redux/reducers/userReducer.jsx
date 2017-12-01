@@ -4,7 +4,7 @@ const initialState = {
     address:'0x56bbc706b8916ade2cd77bb08cc5b5c044a2f10d',
     language:null,
     languageConfig:en,
-    isLogin:true,
+    isLogin:false,
     token:null
 }
 

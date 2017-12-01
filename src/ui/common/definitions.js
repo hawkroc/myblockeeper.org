@@ -107,7 +107,6 @@ const getKeyDefs = ({
 			displayKey: 'From',
 			formattedValueTransformer: value => value,
 			displayValueTransformer: (value) =>{ 
-				console.log('address '+JSON.stringify(address ))
 			let rs= (value===address)?true:false
 			return (
 				rs?

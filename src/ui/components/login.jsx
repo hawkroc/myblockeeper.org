@@ -1,4 +1,6 @@
 import { Form, Icon, Input, Button, Card } from "antd";
+// import Recaptcha from 'react-recaptcha';
+import ValidationComponent from '../common/validation'
 import React from "react";
 import logo from "../../source/img/blockeeper_Blue.png";
 import "../../App.css";
@@ -17,6 +19,9 @@ class LoginForm extends React.Component {
       }
     });
   };
+  onloadCallback=()=>{
+    console.log('this is onloadCallback') 
+  }
 
   getAddressFromKey = (key) => {
   
@@ -61,7 +66,7 @@ class LoginForm extends React.Component {
 <div>
       <div className="App">
           <header>
-            <img src={logo} alt="logo" />
+            {/* <img src={logo} alt="logo" /> */}
           </header>
         </div>
       <Card
@@ -94,6 +99,9 @@ class LoginForm extends React.Component {
               Don't have a wallet?You can get one!
             </a>
           </FormItem>
+          <FormItem className="validation">
+          <ValidationComponent />
+   </FormItem>
         </Form>
       </Card>
       </div>

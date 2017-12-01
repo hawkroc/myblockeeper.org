@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^2.11.2",
+    "antd": "^2.13.1",
     "axios": "^0.16.2",
     "echarts": "^3.7.2",
     "ethereumjs-util": "^5.1.2",
@@ -11,6 +11,7 @@
     "react-copy-to-clipboard": "^5.0.0",
     "react-csv": "^1.0.8",
     "react-dom": "^16.0.0",
+    "react-recaptcha": "^2.3.5",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
@@ -23,6 +24,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.6.0"
+    "babel-preset-env": "^1.6.0",
+    "faker": "^4.1.0"
   }
 }
