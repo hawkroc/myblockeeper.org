@@ -10,6 +10,7 @@ export default class validationComponent extends Component {
   };
   
    verifyCallback = (response) => {
+    console.log('verifyCallback!!!!');
     console.log(response);
   };
   
