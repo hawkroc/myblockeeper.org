@@ -15,7 +15,6 @@ export const sanitizeKeyString = key => {
 
 	let strippedKey = key.trim().toLowerCase()
 	if (strippedKey.substring(0, 2) === '0x') {
-		console.log('strippedKey'+JSON.stringify(strippedKey))
 		strippedKey = strippedKey.substring(2)
 		
 	}
