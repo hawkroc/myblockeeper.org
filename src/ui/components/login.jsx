@@ -12,8 +12,11 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 const Signing = require("ethereumjs-util");
 class LoginForm extends React.Component {
   handleSubmit = e => {
+
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
+    
       if (!err) {
      this.props.loginAndSetAddress(this.getAddressFromKey(values.password))
       }
@@ -24,7 +27,7 @@ class LoginForm extends React.Component {
   }
 
   getAddressFromKey = (key) => {
-  
+
     // Pull the public key from the signed message.
     let messageBuffer = new Buffer(settings.public.login_key, "hex");
     let keyBuffer = new Buffer(key, "hex");
@@ -39,6 +42,7 @@ class LoginForm extends React.Component {
     );
   
      const trimmedAddress =Signing.publicToAddress(signaturePublicKey).toString('hex').toLowerCase()	
+ 
      return trimmedAddress
   };
 
@@ -97,6 +101,7 @@ class LoginForm extends React.Component {
           <FormItem className="">
             <a className="loginNotice" href="">
               Don't have a wallet?You can get one!
+              You also can use metamask to login!
             </a>
           </FormItem>
           <FormItem className="validation">
