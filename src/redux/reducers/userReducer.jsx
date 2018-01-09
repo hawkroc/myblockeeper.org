@@ -1,20 +1,19 @@
-import * as actionTypes from "../actions/actionTypes"
+import * as actionTypes from '../actions/actionTypes'
 import en from '../../source/language/en'
 const initialState = {
-    address:'0x56bbc706b8916ade2cd77bb08cc5b5c044a2f10d',
-    language:null,
-    languageConfig:en,
-    isLogin:false,
-    token:null
+	address: '0x56bbc706b8916ade2cd77bb08cc5b5c044a2f10d',
+	language: null,
+	languageConfig: en,
+	isLogin: false,
+	token: null
 }
 
 export default (state = initialState, action) => {
-  switch (action.type) {
+	switch (action.type) {
+		case actionTypes.LOGIN_KEY:
+			return Object.assign({}, state, { address: action.payload, isLogin: true })
 
-  case actionTypes.LOGIN_KEY:
-    return Object.assign({}, state, { address: action.payload,isLogin:true })
-
-  default:
-    return state
-  }
+		default:
+			return state
+	}
 }

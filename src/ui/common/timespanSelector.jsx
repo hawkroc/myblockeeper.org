@@ -5,7 +5,7 @@ const { RangePicker } = DatePicker
 
 /**
  * Presents a timespan selctor for temporal filtering.
- * 
+ *
  */
 const View = ({
 	// When timespan data has changed.

@@ -1,7 +1,7 @@
 /**
  * Example adapted from Ant Design website:
  *  https://ant.design/components/table/#components-table-demo-edit-cell
- * 
+ *
  */
 
 import React from 'react'
@@ -23,10 +23,9 @@ class EditableCell extends React.Component {
 		}
 
 		check = () => {
-		
 			if (this.props.onChangeConfirmed) {
-			let rs=	this.props.onChangeConfirmed(this.state.value.trim())
-				if(!rs){
+				let rs =	this.props.onChangeConfirmed(this.state.value.trim())
+				if(!rs) {
 					this.setState({ editable: false })
 				}
 			}

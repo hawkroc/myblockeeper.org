@@ -5,7 +5,7 @@ import rootReducer from  './reducers/rootReducer'
 
 /**
  * The global state container.
- * 
+ *
  */
 const store =  createStore(
 	rootReducer,

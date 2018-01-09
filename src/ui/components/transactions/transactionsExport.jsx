@@ -8,7 +8,7 @@ const DEFAULT_EXPORT_FIELDS = ['Timestamp', 'From', 'To', 'ETH']
 
 /**
  * Component for exporting transaction data.
- * 
+ *
  */
 class TransactionsExport extends React.Component {
 	constructor(...args) {
@@ -42,7 +42,7 @@ class TransactionsExport extends React.Component {
 				)
 
 				Object.defineProperty(
-					txExport, 
+					txExport,
 					dispKey,
 					Object.getOwnPropertyDescriptor(t, keyDef.key)
 				)

@@ -7,15 +7,15 @@ const weiToEther = value => (value * Math.pow(10, -18))
 
 // TODO: if we find ourselves doing too much datetime manipulation, use moment.js.
 const monthNames = [
-	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+	'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ]
 
 const maskLongNumberValue = value => {
 	// Fix values to avoid automatic conversion to scientific notation.
 	const fixed = Number(value.toPrecision(16))
 	// console.log('new Intl.NumberFormat().format(number)'+JSON.stringify(new Intl.NumberFormat().format(fixed)))
-	return fixed.toString().length > 8 
+	return fixed.toString().length > 8
 		? fixed.toFixed(8) + '...'
 		: fixed.toString()
 }
@@ -43,7 +43,7 @@ const EXAMPLE_KEY_DEF = {
 	/**
 	 * The formatted value. This should retain all of the useful value,
 	 * but formatted nicely (or functionally) for exporting.
-	 * 
+	 *
 	 * e.g. unix timestamp -> human readable datetime.
 	 * e.g. wei -> ether
 	 */
@@ -54,7 +54,7 @@ const EXAMPLE_KEY_DEF = {
 	/**
 	 * The value to display in the core application. This can simply return
 	 * the value/formatted value if there is no further processing required.
-	 * 
+	 *
 	 * e.g. full 64 hex character address -> "0xffffff..."
 	 */
 	displayValueTransformer: (value, formattedValue) => {
@@ -64,10 +64,10 @@ const EXAMPLE_KEY_DEF = {
 
 /**
  * Key definitions for displaying and exporting data uniformly.
- * 
- * For module-derived columns, args can be passed into this closure 
+ *
+ * For module-derived columns, args can be passed into this closure
  * (i.e. for id->string masking)
- * 
+ *
  */
 const getKeyDefs = ({
 	address
@@ -106,15 +106,14 @@ const getKeyDefs = ({
 			key: 'from',
 			displayKey: 'From',
 			formattedValueTransformer: value => value,
-			displayValueTransformer: (value) =>{ 
-			let rs= (value===address)?true:false
-			return (
-				rs?
-				<div>{value}<b className="out label-address">OUT</b></div> :<div>{value}</div>
-			
-			)
-		
-		}
+			displayValueTransformer: (value) =>{
+				let rs = (value === address) ? true : false
+				return (
+					rs ?
+						<div>{value}<b className="out label-address">OUT</b></div> : <div>{value}</div>
+
+				)
+			}
 		},
 		// Transaction's target address.
 		{
@@ -122,27 +121,24 @@ const getKeyDefs = ({
 			key: 'to',
 			displayKey: 'To',
 			formattedValueTransformer: value => value,
-			displayValueTransformer:(value) =>{ 
-			let rs= (value===address)?true:false
-			return (
-				rs?
-				<div>{value}<b className="in label-address"> IN</b></div>:<div>{value}</div>
-			
-			)
-		
-		}
+			displayValueTransformer: (value) =>{
+				let rs = (value === address) ? true : false
+				return (
+					rs ?
+						<div>{value}<b className="in label-address"> IN</b></div> : <div>{value}</div>
+
+				)
+			}
 		},
 
 
-
-		
 		// Transaction's explicit transferred value (in Ether)
 		{
 			id: 'core_transaction_value_eth',
 			key: 'value',
 			displayKey: 'ETH',
 			formattedValueTransformer: value => weiToEther(value),
-			displayValueTransformer: (_, formattedValue) => formattedValue == 0 ? '' 
+			displayValueTransformer: (_, formattedValue) => formattedValue == 0 ? ''
 				: maskLongNumberValue(formattedValue)
 		},
 		// // Transaction's explicit transferred value in USD
@@ -151,10 +147,10 @@ const getKeyDefs = ({
 		// 	key: 'value',
 		// 	displayKey: 'USD',
 
-		// 	formattedValueTransformer: (value, { timeStamp }) => 
+		// 	formattedValueTransformer: (value, { timeStamp }) =>
 		// 		valueExchangeTransformer(timeStamp, 'ETH', weiToEther(value)),
 
-		// 	displayValueTransformer: (value, formattedValue) => 
+		// 	displayValueTransformer: (value, formattedValue) =>
 		// 		value == 0 ? '' : formattedValue.toFixed(2)
 		// },
 		// // Transaction's explicit transferred value in Bitcoin
@@ -163,10 +159,10 @@ const getKeyDefs = ({
 		// 	key: 'value',
 		// 	displayKey: 'BTC',
 
-		// 	formattedValueTransformer: (value, { timeStamp }) => 
+		// 	formattedValueTransformer: (value, { timeStamp }) =>
 		// 		valueExchangeTransformer(timeStamp, 'BTC', weiToEther(value)),
 
-		// 	displayValueTransformer: (value, formattedValue) => 
+		// 	displayValueTransformer: (value, formattedValue) =>
 		// 		value == 0 ? '' : maskLongNumberValue(formattedValue)
 		// },
 	]
@@ -178,12 +174,10 @@ const buildColumns = ({
 	// addressDisplayTransformer,
 	// valueExchangeTransformer
 }) => {
-
 	let columnKeys = getKeyDefs({address})
 	let columns = []
 
 	for(let ck of columnKeys) {
-
 		// TODO: abstract default.
 		let column = {
 			title: ck.displayKey,
