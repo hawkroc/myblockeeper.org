@@ -19,7 +19,7 @@ const View = ({
 			<RangePicker
 				onChange={(dates) => onTimespanSelected(dates)}
 				size="large"
-				format="YYYY-MM-DD"
+				format="YYYY/MM/DD"
 			/>
 		</div>
 	)

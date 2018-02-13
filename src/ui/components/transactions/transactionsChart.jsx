@@ -13,7 +13,7 @@ const Line = createG2(chart => {
 
 /**
  * Presents a chart showing transaction information.
- * 
+ *
  */
 const View = ({
 	transactions

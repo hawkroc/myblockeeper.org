@@ -29,7 +29,7 @@ const Layout = () => {
 					<Col offset={0} span={2} style={{float: 'right'}}>
 						<Button
 							type="primary"
-							onClick={console.log('this is logout')}
+							// onClick={console.log('this is logout')}
 							style={{ width: '100px', margin: '3px' }}>
 							Log out
 						</Button>

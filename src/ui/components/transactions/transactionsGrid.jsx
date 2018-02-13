@@ -3,12 +3,12 @@ import { Table } from 'antd'
 
 import coreDefinitions from '../../common/definitions'
 
- //import taxationDefinitions from '../../../modules/taxation/definitions'
- //import labellingDefinitions from '../../../modules/transaction-labelling/definitions'
+// import taxationDefinitions from '../../../modules/taxation/definitions'
+// import labellingDefinitions from '../../../modules/transaction-labelling/definitions'
 
 /**
  * Presents a grid showing transaction information.
- * 
+ *
  */
 
 
@@ -16,25 +16,24 @@ const View = ({
 	transactions,
 	// usdExchangeRate,
 	// activeProfile,
-     address
+	address
 	// addressDisplayTransformer,
 	// valueExchangeTransformer
 }) => {
-  
 	let columns = coreDefinitions.buildColumns({
 		address
 		// usdExchangeRate,
 		// addressDisplayTransformer,
 		// valueExchangeTransformer
 	})
-	
+
 	// TODO: no magic numbers.
 	const height = window.innerHeight - 320
-	
+
 	// Same for the labelling module.
 	// if (activeProfile.isModuleEnabled('transaction-labelling')) {
 	// 	let transactionLabellingModule = activeProfile.getModule('transaction-labelling')
-	
+
 	// 	columns = columns.concat(labellingDefinitions.buildColumns({
 	// 		transactionLabellingModule
 	// 	}))
@@ -56,8 +55,8 @@ const View = ({
 				columns={ columns }
 				dataSource={ transactions }
 				rowKey={ transaction => transaction.timeStamp }
-				pagination={{ pageSize: 50 }}
-				scroll={{ y: height }}
+				// pagination={{ pageSize: 20 }}
+				 scroll={{ y: height }}
 			/>
 		</div>
 	)

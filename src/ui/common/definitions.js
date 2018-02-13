@@ -1,7 +1,9 @@
 import React from 'react'
-import { Select } from 'antd'
+
 
 import ClickCopyCell from './clickCopyCell'
+import TagTransactionCell from './tagTransactionCell'
+import  { subString }from './../../util/inputTransformationHelpers'
 
 const weiToEther = value => (value * Math.pow(10, -18))
 
@@ -76,6 +78,23 @@ const getKeyDefs = ({
 }) => {
 	return [
 		// Transaction timestamp.
+
+		{
+			id: 'core_from_tag',
+			key: 'from',
+			displayKey: 'Tag',
+
+			formattedValueTransformer: value => value,
+			displayValueTransformer: (value) =>{
+				let rs = (value === address) ? true : false
+				return (
+					<TagTransactionCell isOut={rs}/>
+
+				)
+			}
+		},
+
+
 		{
 			id: 'core_timestamp',
 			key: 'timeStamp',
@@ -93,13 +112,13 @@ const getKeyDefs = ({
 		},
 
 		// Transaction's originating address.
-		{
-			id: 'core_blockNumber',
-			key: 'blockNumber',
-			displayKey: 'BlockNumber',
-			formattedValueTransformer: value => value,
-			displayValueTransformer: value => value
-		},
+		// {
+		// 	id: 'core_blockNumber',
+		// 	key: 'blockNumber',
+		// 	displayKey: 'BlockNumber',
+		// 	formattedValueTransformer: value => value,
+		// 	displayValueTransformer: value => value
+		// },
 		// Transaction's originating address.
 		{
 			id: 'core_from_address',
@@ -107,10 +126,8 @@ const getKeyDefs = ({
 			displayKey: 'From',
 			formattedValueTransformer: value => value,
 			displayValueTransformer: (value) =>{
-				let rs = (value === address) ? true : false
 				return (
-					rs ?
-						<div>{value}<b className="out label-address">OUT</b></div> : <div>{value}</div>
+					<div>{value}</div>
 
 				)
 			}
@@ -122,10 +139,9 @@ const getKeyDefs = ({
 			displayKey: 'To',
 			formattedValueTransformer: value => value,
 			displayValueTransformer: (value) =>{
-				let rs = (value === address) ? true : false
 				return (
-					rs ?
-						<div>{value}<b className="in label-address"> IN</b></div> : <div>{value}</div>
+
+					<div>{value}</div>
 
 				)
 			}
@@ -138,9 +154,29 @@ const getKeyDefs = ({
 			key: 'value',
 			displayKey: 'ETH',
 			formattedValueTransformer: value => weiToEther(value),
-			displayValueTransformer: (_, formattedValue) => formattedValue == 0 ? ''
+			displayValueTransformer: (_, formattedValue) => formattedValue === 0 ? ''
 				: maskLongNumberValue(formattedValue)
 		},
+
+		{
+			id: 'core_transaction_Label',
+			key: 'value',
+			displayKey: 'Label',
+			formattedValueTransformer: value => weiToEther(value),
+			displayValueTransformer: (_, formattedValue) => formattedValue === 0 ? ''
+				: maskLongNumberValue(formattedValue)
+		},
+
+		{
+			id: 'core_transaction_Note',
+			key: 'value',
+			displayKey: 'Note',
+			formattedValueTransformer: value => weiToEther(value),
+			displayValueTransformer: (_, formattedValue) => formattedValue === 0 ? ''
+				: maskLongNumberValue(formattedValue)
+		},
+
+
 		// // Transaction's explicit transferred value in USD
 		// {
 		// 	id: 'core_transaction_value_usd',
@@ -183,7 +219,7 @@ const buildColumns = ({
 			title: ck.displayKey,
 			dataIndex: ck.key,
 			key: ck.id,
-			width: '10%',
+
 
 			// Default: render display value.
 			render: (value, record) => {
@@ -194,19 +230,32 @@ const buildColumns = ({
 
 		// Build columns based on data keys.
 		switch (ck.id) {
+			 case 'core_from_tag':
+			 column.width = '5%'
+			 break
+
+			 case 'core_transaction_value_eth':
+			 column.width = '5%'
+			 break
+
+
 			case 'core_timestamp':
+			    column.width = '8%'
 				column.sortOrder = 'descend'
 				column.sorter = (a, b) => a.timeStamp - b.timeStamp
 				break
 
 			case 'core_from_address':
 			case 'core_to_address':
+				column.width = '8%'
 				column.render = value => {
 					return (
 						<div className="editable-cell">
-							<div className="editable-cell-text-wrapper">
-								{ck.displayValueTransformer(value)}
-								<ClickCopyCell text={ck.formattedValueTransformer(value)} />
+							<div className="">
+
+								{subString(value, 10)} <ClickCopyCell text={value} />
+
+
 							</div>
 						</div>
 					)
